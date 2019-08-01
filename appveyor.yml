@@ -1,0 +1,55 @@
+version: '1.0.{build}'
+
+platform:
+  - x64
+
+install:
+  # Download ninja
+  - cmd: mkdir C:\ninja-build
+  - ps: (new-object net.webclient).DownloadFile('https://github.com/mesonbuild/cidata/raw/master/ninja.exe', 'C:\ninja-build\ninja.exe')
+  - cmd: set PATH=C:\ninja-build;%PATH%
+
+
+clone_folder: c:\projects\llvm-tutor
+image:
+- Visual Studio 2017
+ 
+configuration:
+  - Release
+
+environment:
+  matrix:
+  - arch: Win64
+matrix:
+  fast_finish: true
+
+init:
+- set arch=
+- if "%arch%"=="Win64" ( set arch= Win64)
+- echo %arch%
+- echo %APPVEYOR_BUILD_WORKER_IMAGE%
+- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" ( set generator="Visual Studio 15 2017%arch%" )
+- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" ( set generator="Visual Studio 14 2015%arch%" )
+- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2013" ( set generator="Visual Studio 12 2013%arch%" )
+- echo %generator%
+
+before_build:
+- cmd: |-
+    git clone https://github.com/llvm-mirror/llvm.git
+    cd llvm
+    git checkout release_80
+    mkdir build
+    cd build
+    cmake -DLLVM_TARGETS_TO_BUILD=X86 -DCMAKE_CXX_FLAGS="/MP" -DCMAKE_C_FLAGS="/MP" ..
+    cmake --build . --config Release --target INSTALL
+    choco install llvm
+    dir "C:\Program Files\LLVM"
+    dir "C:\Program Files\LLVM\include"
+    dir "C:\Program Files\LLVM\lib"
+    dir "C:\Program Files\LLVM\share"
+    dir "C:\Program Files\LLVM\bin"
+
+build:
+  project: $(APPVEYOR_BUILD_FOLDER)\_build\llvm-tutor.sln
+  verbosity: minimal
+  parallel: true
