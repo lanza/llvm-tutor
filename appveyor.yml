@@ -33,6 +33,7 @@ init:
 
 before_build:
 - ps: |
+    # Download LLVM 8 pre-build packages - courtesy of Zig Lang
     mkdir C:\llvm-install
     $client = new-object System.Net.WebClient
     $client.DownloadFile('https://ziglang.org/deps/llvm%2bclang-8.0.0-win64-msvc-release.tar.xz', 'C:\llvm-install\llvm.tar.xz')
@@ -40,7 +41,7 @@ before_build:
     choco install archiver
     arc unarchive llvm.tar.xz C:\llvm-install\llvm
     dir llvm\llvm+clang-8.0.0-win64-msvc-release\
-- cmd: |
+- cmd: >-
     REM CMake scripts print some messages (via 'message'). Although not errors,
     REM these go to stderr, which PowerShell treats as exceptions. For this
     REM reason, run CMake in the command line.
@@ -48,7 +49,7 @@ before_build:
     mkdir build
     cd build
     echo %generator%
-    cmake C:\projects\llvm-tutor -DLT_LLVM_INSTALL_DIR="C:\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release"
+    cmake C:\projects\llvm-tutor -DLT_LLVM_INSTALL_DIR="C:\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release" -G "Visual Studio 15"
     cmake --build . --config Release
 
 build:
