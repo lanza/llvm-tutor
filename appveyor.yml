@@ -39,14 +39,9 @@ before_build:
     $client = new-object System.Net.WebClient
     $client.DownloadFile('https://ziglang.org/deps/llvm%2bclang-8.0.0-win64-msvc-release.tar.xz', 'C:\llvm-install\llvm.tar.xz')
     cd C:\llvm-install\
+    choco install archiver
     arc unarchive llvm.tar.xz
     dir llvm
-    choco install llvm
-    dir "C:\Program Files\LLVM"
-    dir "C:\Program Files\LLVM\include"
-    dir "C:\Program Files\LLVM\lib"
-    dir "C:\Program Files\LLVM\share"
-    dir "C:\Program Files\LLVM\bin"
 
 build:
   project: $(APPVEYOR_BUILD_FOLDER)\_build\llvm-tutor.sln
