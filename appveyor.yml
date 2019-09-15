@@ -39,6 +39,7 @@ before_build:
     $client.DownloadFile('https://ziglang.org/deps/llvm%2bclang-8.0.0-win64-msvc-release.tar.xz', 'C:\llvm-install\llvm.tar.xz')
     cd C:\llvm-install\
     choco install archiver
+    echo "Unpacking LLVM 8"
     arc unarchive llvm.tar.xz C:\llvm-install\llvm
     dir llvm\llvm+clang-8.0.0-win64-msvc-release\
 - cmd: |
@@ -49,7 +50,8 @@ before_build:
     mkdir build
     cd build
     echo %generator%
-    cmake C:\projects\llvm-tutor -DLT_LLVM_INSTALL_DIR="C:\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release" -G "Visual Studio 16 2019 Win64"
+    echo "Running CMake"
+    cmake C:\projects\llvm-tutor -Thost=x64 -DLT_LLVM_INSTALL_DIR="C:\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release" -G "Visual Studio 16" -A x64
     cmake --build . --config Release
 
 build:
