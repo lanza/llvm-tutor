@@ -1,11 +1,11 @@
-add_llvm_library(StaticCallCounter SHARED StaticCallCounter.cpp PLUGIN_TOOL opt)
-add_llvm_library(DynamicCallCounter SHARED DynamicCallCounter.cpp PLUGIN_TOOL opt)
+add_llvm_library(StaticCallCounter MODULE StaticCallCounter.cpp PLUGIN_TOOL opt)
+add_llvm_library(DynamicCallCounter MODULE DynamicCallCounter.cpp PLUGIN_TOOL opt)
 add_library(DynamicCallCounterStatic STATIC DynamicCallCounter.cpp)
 
-add_llvm_library(MBAAdd SHARED MBAAdd.cpp Ratio.cpp PLUGIN_TOOL opt)
-add_llvm_library(MBASub SHARED MBASub.cpp Ratio.cpp PLUGIN_TOOL opt)
-add_llvm_library(RIV SHARED RIV.cpp PLUGIN_TOOL opt)
-add_llvm_library(DuplicateBB SHARED DuplicateBB.cpp Ratio.cpp PLUGIN_TOOL opt)
+add_llvm_library(MBAAdd MODULE MBAAdd.cpp Ratio.cpp PLUGIN_TOOL opt)
+add_llvm_library(MBASub MODULE MBASub.cpp Ratio.cpp PLUGIN_TOOL opt)
+add_llvm_library(RIV MODULE RIV.cpp PLUGIN_TOOL opt)
+add_llvm_library(DuplicateBB MODULE DuplicateBB.cpp Ratio.cpp PLUGIN_TOOL opt)
 
 # On Darwin (unlike on Linux), undefined symbols in shared objects are not
 # allowed at the end of the link-edit. The plugins defined here:
