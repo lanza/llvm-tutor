@@ -41,7 +41,7 @@ before_build:
     cd C:\llvm-install\
     choco install archiver
     arc unarchive llvm.tar.xz C:\llvm-install\llvm
-    dir llvm
+    dir llvm\llvm+clang-8.0.0-win64-msvc-release\
 
 build:
   project: $(APPVEYOR_BUILD_FOLDER)\_build\llvm-tutor.sln
