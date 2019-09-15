@@ -49,7 +49,7 @@ before_build:
     mkdir build
     cd build
     echo %generator%
-    cmake C:\projects\llvm-tutor -DLT_LLVM_INSTALL_DIR="C:\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release" -G "Visual Studio 15"
+    cmake C:\projects\llvm-tutor -DLT_LLVM_INSTALL_DIR="C:\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release" -G "Visual Studio 15 2017 Win64"
     cmake --build . --config Release
 
 build:
