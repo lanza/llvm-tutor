@@ -5,8 +5,6 @@ platform:
 
 install:
   # Download ninja
-  - cmd: mkdir C:\ninja-build
-  - ps: (new-object net.webclient).DownloadFile('https://github.com/mesonbuild/cidata/raw/master/ninja.exe', 'C:\ninja-build\ninja.exe')
   - cmd: set PATH=C:\ninja-build;%PATH%
   - cinst: archiver
 
@@ -50,7 +48,7 @@ before_build:
     mkdir build
     cd build
     echo %generator%
-    cmake ../ -DLT_LLVM_INSTALL_DIR="C:\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release" -G %generator%"
+    cmake C:\projects\llvm-tutor -DLT_LLVM_INSTALL_DIR="C:\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release" -G %generator%"
     # cmake -build . -config Release
 
 build:
