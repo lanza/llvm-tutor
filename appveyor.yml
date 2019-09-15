@@ -8,7 +8,7 @@ install:
   - cmd: mkdir C:\ninja-build
   - ps: (new-object net.webclient).DownloadFile('https://github.com/mesonbuild/cidata/raw/master/ninja.exe', 'C:\ninja-build\ninja.exe')
   - cmd: set PATH=C:\ninja-build;%PATH%
-
+  - cinst: archiver
 
 clone_folder: c:\projects\llvm-tutor
 image:
@@ -35,6 +35,12 @@ init:
 
 before_build:
 - cmd: |-
+    mkdir C:\llvm-install\
+    $client = new-object System.Net.WebClient
+    $client.DownloadFile('https://ziglang.org/deps/llvm%2bclang-8.0.0-win64-msvc-release.tar.xz', 'C:\llvm-install\llvm.tar.xz')
+    cd C:\llvm-install\
+    arc unarchive llvm.tar.xz
+    dir llvm
     git clone https://github.com/llvm-mirror/llvm.git
     cd llvm
     git checkout release_80
