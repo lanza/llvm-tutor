@@ -14,6 +14,8 @@ set(LT_LLVM_CMAKE_CONFIG_DIR "${LT_LLVM_INSTALL_DIR}/lib/cmake/llvm/")
 list(APPEND CMAKE_PREFIX_PATH "${LT_LLVM_CMAKE_CONFIG_DIR}")
 
 # Set the build flags
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fno-rtti -Wall\
+#  -Werror -Wpedantic -fdiagnostics-color=always")
 
 #===============================================================================
 # 2. LLVM-CONFIGURATION
@@ -42,7 +44,7 @@ endif()
 #===============================================================================
 # 3. ADD THE TARGET
 #===============================================================================
-add_library(HelloWorld SHARED HelloWorld.cpp)
+add_llvm_library(HelloWorld MODULE HelloWorld.cpp PLUGIN_TOOL opt)
 # Allow undefined symbols in shared objects on Darwin (this is the default
 # behaviour on Linux)
 target_link_libraries(HelloWorld
