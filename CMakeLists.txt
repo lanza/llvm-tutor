@@ -93,12 +93,12 @@ option(LLVM_ENABLE_CXX1Y  "Enable C++14" ON)
 option(LLVM_INCLUDE_TOOLS "Generate build targets for the LLVM tools." ON)
 option(LLVM_BUILD_TOOLS "Build the LLVM tools. If OFF, just generate build targets." ON)
 
-# message("LLVM STATUS:
-#   Definitions ${LLVM_DEFINITIONS}
-#   Includes    ${LLVM_INCLUDE_DIRS}
-#   Libraries   ${LLVM_LIBRARY_DIRS}
-#   Targets     ${LLVM_TARGETS_TO_BUILD}"
-# )
+message("LLVM STATUS:
+  Definitions ${LLVM_DEFINITIONS}
+  Includes    ${LLVM_INCLUDE_DIRS}
+  Libraries   ${LLVM_LIBRARY_DIRS}
+  Targets     ${LLVM_TARGETS_TO_BUILD}"
+)
 
 # Now set the LLVM header and library paths:
 include_directories(${LLVM_INCLUDE_DIRS})
