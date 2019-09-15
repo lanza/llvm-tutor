@@ -43,9 +43,9 @@ before_build:
     arc unarchive llvm.tar.xz C:\llvm-install\llvm
     dir llvm\llvm+clang-8.0.0-win64-msvc-release\
 - cmd: |
-    # CMake scripts print some messages (via 'message'). Although not errors,
-    # these go to stderr, which PowerShell treats as exceptions. For this
-    # reason, run CMake in the command line.
+    REM CMake scripts print some messages (via 'message'). Although not errors,
+    REM these go to stderr, which PowerShell treats as exceptions. For this
+    REM reason, run CMake in the command line.
     cd C:\projects\llvm-tutor
     mkdir build
     cd build
