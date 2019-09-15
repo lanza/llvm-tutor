@@ -40,10 +40,6 @@ if (NOT CMAKE_BUILD_TYPE)
 endif()
 
 # Set the build flags
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -std=c++14 -fno-rtti -Wall\
-    -fdiagnostics-color=always")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -std=c++14 -fno-rtti -Wall\
-    -fdiagnostics-color=always -fno-omit-frame-pointer")
 
 # Copied from HandleLLVMOptions.cmake
 function(append_if condition value)

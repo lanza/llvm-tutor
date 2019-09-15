@@ -14,8 +14,6 @@ set(LT_LLVM_CMAKE_CONFIG_DIR "${LT_LLVM_INSTALL_DIR}/lib/cmake/llvm/")
 list(APPEND CMAKE_PREFIX_PATH "${LT_LLVM_CMAKE_CONFIG_DIR}")
 
 # Set the build flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fno-rtti -Wall\
- -Werror -Wpedantic -fdiagnostics-color=always")
 
 #===============================================================================
 # 2. LLVM-CONFIGURATION

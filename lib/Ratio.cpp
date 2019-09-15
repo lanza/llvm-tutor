@@ -25,7 +25,7 @@ bool parser<Ratio>::parse(Option &Opt, StringRef ArgName,
   if (EndPtr == ArgCStr) {
     return Opt.error(ArgName + " value `" + Arg +
                      "' is not a floating point value");
-  } else if (0. > TheRatio or 1. < TheRatio) {
+  } else if (0. > TheRatio || 1. < TheRatio) {
     return Opt.error("'" + Arg + "' is not in [0., 1.]");
   } else {
     Val.setRatio(TheRatio);
