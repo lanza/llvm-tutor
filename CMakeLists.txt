@@ -30,8 +30,8 @@ message(FATAL_ERROR
     " LT_LLVM_CMAKE_FILE (${LT_LLVM_CMAKE_FILE}) is invalid.")
 endif()
 
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fno-rtti -Wall\
-#  -Werror -Wpedantic -fdiagnostics-color=always")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -fno-rtti -Wall\
+ -Werror -Wpedantic -fdiagnostics-color=always")
 
 # Add path to LLVMConfig.cmake (so that find_package can find LLVM)
 set(LT_LLVM_CMAKE_CONFIG_DIR "${LT_LLVM_INSTALL_DIR}/lib/cmake/llvm/")
@@ -110,6 +110,6 @@ add_definitions(${LLVM_DEFINITIONS})
 # link/include paths are available for the sub-projects.
 #===============================================================================
 add_subdirectory(lib)
-add_subdirectory(tools)
+# add_subdirectory(tools)
 add_subdirectory(test)
 add_subdirectory(HelloWorld)
