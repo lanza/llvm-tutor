@@ -45,7 +45,7 @@ before_build:
     cd C:\projects\llvm-tutor
     mkdir build
     cd build
-    cmake ../ -DLT_LLVM_INSTALL_DIR=":\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release"
+    cmake ../ -DLT_LLVM_INSTALL_DIR="C:\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release"
     cmake -build . -config Release
 
 build:
