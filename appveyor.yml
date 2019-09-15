@@ -49,7 +49,7 @@ before_build:
     cd build
     echo %generator%
     cmake C:\projects\llvm-tutor -DLT_LLVM_INSTALL_DIR="C:\llvm-install\llvm\llvm+clang-8.0.0-win64-msvc-release"
-    cmake --build . -config Release
+    cmake --build . --config Release
 
 build:
   project: $(APPVEYOR_BUILD_FOLDER)\build\llvm-tutor.sln
