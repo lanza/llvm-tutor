@@ -11,30 +11,33 @@
 
 ; CHECK-LABEL: @foo
 ; 1st substitution
-; CHECK:       {{%[0-9]+}} = xor i8 {{%[0-9]+}}, {{%[0-9]+}}
-; CHECK:       {{%[0-9]+}} = and i8 {{%[0-9]+}}, {{%[0-9]+}}
-; CHECK:       {{%[0-9]+}} = mul i8 2, {{%[0-9]+}}
-; CHECK:       [[REG_1:%[0-9]+]] = add i8 {{%[0-9]+}}, {{%[0-9]+}}
+; CHECK-DAG:   {{%[0-9]+}} = xor i8 {{%[0-9]+}}, {{%[0-9]+}}
+; CHECK-DAG:   {{%[0-9]+}} = and i8 {{%[0-9]+}}, {{%[0-9]+}}
+; CHECK-DAG:   {{%[0-9]+}} = mul i8 2, {{%[0-9]+}}
+; CHECK-NOT:   [[REG_2:%[0-9]+]] = mul i8 [[REG_1]], 39
+; CHECK-DAG:   [[REG_1:%[0-9]+]] = add i8 {{%[0-9]+}}, {{%[0-9]+}}
 ; CHECK-NEXT:  [[REG_2:%[0-9]+]] = mul i8 [[REG_1]], 39
 ; CHECK-NEXT:  [[REG_3:%[0-9]+]] = add i8 [[REG_2]], 23
 ; CHECK-NEXT:  [[REG_4:%[0-9]+]] = mul i8 [[REG_3]], -105
 ; CHECK-NEXT:  [[REG_5:%[0-9]+]] = add i8 [[REG_4]], 111
 ;
 ; 2nd addition
-; CHECK:       {{%[0-9]+}} = xor i8 {{%[0-9]+}}, {{%[0-9]+}}
-; CHECK:       {{%[0-9]+}} = and i8 {{%[0-9]+}}, {{%[0-9]+}}
-; CHECK:       {{%[0-9]+}} = mul i8 2, {{%[0-9]+}}
-; CHECK:       [[REG_1:%[0-9]+]] = add i8 {{%[0-9]+}}, {{%[0-9]+}}
+; CHECK-DAG:   {{%[0-9]+}} = xor i8 {{%[0-9]+}}, {{%[0-9]+}}
+; CHECK-DAG:   {{%[0-9]+}} = and i8 {{%[0-9]+}}, {{%[0-9]+}}
+; CHECK-DAG:   {{%[0-9]+}} = mul i8 2, {{%[0-9]+}}
+; CHECK-NOT:   [[REG_2:%[0-9]+]] = mul i8 [[REG_1]], 39
+; CHECK-DAG:   [[REG_1:%[0-9]+]] = add i8 {{%[0-9]+}}, {{%[0-9]+}}
 ; CHECK-NEXT:  [[REG_2:%[0-9]+]] = mul i8 [[REG_1]], 39
 ; CHECK-NEXT:  [[REG_3:%[0-9]+]] = add i8 [[REG_2]], 23
 ; CHECK-NEXT:  [[REG_4:%[0-9]+]] = mul i8 [[REG_3]], -105
 ; CHECK-NEXT:  [[REG_5:%[0-9]+]] = add i8 [[REG_4]], 111
 ;
 ; 3rd addition
-; CHECK:       {{%[0-9]+}} = xor i8 {{%[0-9]+}}, {{%[0-9]+}}
-; CHECK:       {{%[0-9]+}} = and i8 {{%[0-9]+}}, {{%[0-9]+}}
-; CHECK:       {{%[0-9]+}} = mul i8 2, {{%[0-9]+}}
-; CHECK:       [[REG_1:%[0-9]+]] = add i8 {{%[0-9]+}}, {{%[0-9]+}}
+; CHECK-DAG:   {{%[0-9]+}} = xor i8 {{%[0-9]+}}, {{%[0-9]+}}
+; CHECK-DAG:   {{%[0-9]+}} = and i8 {{%[0-9]+}}, {{%[0-9]+}}
+; CHECK-DAG:   {{%[0-9]+}} = mul i8 2, {{%[0-9]+}}
+; CHECK-NOT:   [[REG_2:%[0-9]+]] = mul i8 [[REG_1]], 39
+; CHECK-DAG:   [[REG_1:%[0-9]+]] = add i8 {{%[0-9]+}}, {{%[0-9]+}}
 ; CHECK-NEXT:  [[REG_2:%[0-9]+]] = mul i8 [[REG_1]], 39
 ; CHECK-NEXT:  [[REG_3:%[0-9]+]] = add i8 [[REG_2]], 23
 ; CHECK-NEXT:  [[REG_4:%[0-9]+]] = mul i8 [[REG_3]], -105
