@@ -5,40 +5,40 @@
 ; 1st '+'
 ; MBA-DAG:   {{%[0-9]+}} = xor i8 %in_0, %in_1
 ; MBA-DAG:   {{%[0-9]+}} = and i8 %in_0, %in_1
-; MBA-DAG:   {{%[0-9]+}} = mul i8 2, %2
-; MBA-NOT:   %5 = mul i8 %4, 39
-; MBA-DAG:   {{%[0-9]+}} = add i8 %1, %3
-; MBA:       %5 = mul i8 %4, 39
+; MBA-DAG:   {{%[0-9]+}} = mul i8 2, {{%[0-9]+}}
+; MBA-NOT:   %5 = mul i8 {{%[0-9]+}}, 39
+; MBA-DAG:   {{%[0-9]+}} = add i8 {{%[0-9]+}}, {{%[0-9]+}}
+; MBA:       %5 = mul i8 {{%[0-9]+}}, 39
 ; MBA-NEXT:  %6 = add i8 %5, 23
 ; MBA-NEXT:  %7 = mul i8 %6, -105
 ; MBA-NEXT:  %8 = add i8 %7, 111
 ; 2nd '+'
 ; MBA-DAG:   {{%[0-9]+}} = xor i8 %in_2, %8
 ; MBA-DAG:   {{%[0-9]+}} = and i8 %in_2, %8
-; MBA-DAG:   {{%[0-9]+}} = mul i8 2, %10
-; MBA-NOT:   %13 = mul i8 %12, 39
-; MBA-DAG:   {{%[0-9]+}} = add i8 %9, %11
-; MBA:       %13 = mul i8 %12, 39
+; MBA-DAG:   {{%[0-9]+}} = mul i8 2, {{%[0-9]+}}
+; MBA-NOT:   %13 = mul i8 {{%[0-9]+}}, 39
+; MBA-DAG:   {{%[0-9]+}} = add i8 {{%[0-9]+}}, {{%[0-9]+}}
+; MBA:       %13 = mul i8 {{%[0-9]+}}, 39
 ; MBA-NEXT:  %14 = add i8 %13, 23
 ; MBA-NEXT:  %15 = mul i8 %14, -105
 ; MBA-NEXT:  %16 = add i8 %15, 111
 ; 3rd '+'
 ; MBA-DAG:   {{%[0-9]+}} = xor i8 %in_3, %16
 ; MBA-DAG:   {{%[0-9]+}} = and i8 %in_3, %16
-; MBA-DAG:   {{%[0-9]+}} = mul i8 2, %18
-; MBA-NOT:   %21 = mul i8 %20, 39
-; MBA-DAG:   {{%[0-9]+}} = add i8 %17, %19
-; MBA:       %21 = mul i8 %20, 39
+; MBA-DAG:   {{%[0-9]+}} = mul i8 2, {{%[0-9]+}}
+; MBA-NOT:   %21 = mul i8 {{%[0-9]+}}, 39
+; MBA-DAG:   {{%[0-9]+}} = add i8 {{%[0-9]+}}, {{%[0-9]+}}
+; MBA:       %21 = mul i8 {{%[0-9]+}}, 39
 ; MBA-NEXT:  %22 = add i8 %21, 23
 ; MBA-NEXT:  %23 = mul i8 %22, -105
 ; MBA-NEXT:  %24 = add i8 %23, 111
 ; 4th '+'
 ; MBA-DAG:   {{%[0-9]+}} = xor i8 %in_4, %24
 ; MBA-DAG:   {{%[0-9]+}} = and i8 %in_4, %24
-; MBA-DAG:   {{%[0-9]+}} = mul i8 2, %26
-; MBA-NOT:   %29 = mul i8 %28, 39
-; MBA-DAG:   {{%[0-9]+}} = add i8 %25, %27
-; MBA:       %29 = mul i8 %28, 39
+; MBA-DAG:   {{%[0-9]+}} = mul i8 2, {{%[0-9]+}}
+; MBA-NOT:   %29 = mul i8 {{%[0-9]+}}, 39
+; MBA-DAG:   {{%[0-9]+}} = add i8 {{%[0-9]+}}, {{%[0-9]+}}
+; MBA:       %29 = mul i8 {{%[0-9]+}}, 39
 ; MBA-NEXT:  %30 = add i8 %29, 23
 ; MBA-NEXT:  %31 = mul i8 %30, -105
 ; MBA-NEXT:  %32 = add i8 %31, 111
