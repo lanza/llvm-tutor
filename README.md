@@ -287,6 +287,52 @@ cloning all the instructions (with the exception of [PHI
 nodes](https://en.wikipedia.org/wiki/Static_single_assignment_form)) into the
 new blocks.
 
+Debugging
+---------
+```bash
+export LLVM_DIR=<installation/dir/of/llvm/9>
+$LLVM_DIR/bin/clang -emit-llvm -S -O1 inputs/input_for_mba.c -o input_for_mba.ll
+$LLVM_DIR/bin/opt -load-pass-plugin <build_dir>/lib/libMBAAdd.dylib -passes=mba-add input_for_mba.ll -debug-only=mba-add -stats -o out.ll
+
+```
+
+
+When things go wrong, you may want to use a debugger. Below I demonstrate how
+to debug [**MBAAdd**](#mbaadd) (more specifically, how to set up a breakpoint
+on entry to `MBAAdd::run`).
+
+### Mac OS X
+The default debugger on OS X is [LLDB](http://lldb.llvm.org). You will
+normally use it like this:
+```bash
+export LLVM_DIR=<installation/dir/of/llvm/9>
+$LLVM_DIR/bin/clang -emit-llvm -S -O1 inputs/input_for_mba.c -o input_for_mba.ll
+lldb -- $LLVM_DIR/bin/opt -load-pass-plugin <build_dir>/lib/libMBAAdd.dylib -passes=mba-add input_for_mba.ll -o out.ll
+(lldb) breakpoint set --name MBAAdd::run
+(lldb) process launch
+```
+or, equivalently, by using LLDBs aliases:
+```bash
+export LLVM_DIR=<installation/dir/of/llvm/9>
+$LLVM_DIR/bin/clang -emit-llvm -S -O1 inputs/input_for_mba.c -o input_for_mba.ll
+lldb -- $LLVM_DIR/bin/opt -load-pass-plugin <build_dir>/lib/libMBAAdd.dylib -passes=mba-add input_for_mba.ll -o out.ll
+(lldb) b MBAAdd::run
+(lldb) r
+```
+At this point, LLDB should break at the entry to `MBAAdd::run`.
+
+### Ubuntu
+On most Linux systems, [GDB](https://www.gnu.org/software/gdb/) is the most
+popular debugger. A typical session will look like this:
+```bash
+export LLVM_DIR=<installation/dir/of/llvm/9>
+$LLVM_DIR/bin/clang -emit-llvm -S -O1 inputs/input_for_mba.c -o input_for_mba.ll
+gdb --args $LLVM_DIR/bin/opt -load-pass-plugin <build_dir>/lib/libMBAAdd.so -passes=mba-add input_for_mba.ll -o out.ll
+(gdb) b MBAAdd.cpp:MBAAdd::run
+(gdb) r
+```
+At this point, GDB should break at the entry to `MBAAdd::run`.
+
 Credits
 -------
 This is first and foremost a community effort. This project wouldn't be
