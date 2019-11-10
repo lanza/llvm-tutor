@@ -18,9 +18,8 @@ document explains how to get started.
 ### Table of Contents
 * [HelloWorld](#helloworld)
 * [Development Environment](#development-environment)
-* [Build Instructions](#build-instructions)
-* [Passes](#passes)
-* [Testing](#testing)
+* [Build & Testing](#building&testing)
+* [Overview Of The Passes](#overview-of-the-passes)
 * [Debugging](#debugging)
 * [Credits & References](#credits)
 * [License](#license)
@@ -116,7 +115,7 @@ cmake --build .
 For more details read the [official
 documentation](https://llvm.org/docs/CMake.html).
 
-Building llvm-tutor
+Building & Testing
 ===================
 You can build **llvm-tutor** (and all the provided passes) as follows:
 ```bash
@@ -130,18 +129,20 @@ installation or build directory of LLVM 9. It is used to locate the
 corresponding `LLVMConfig.cmake` script that is used to set the include and
 library paths.
 
-In order to run the tests, you need to install **llvm-lit** (aka **lit**) (it's
-not bundled with LLVM 9 packages). The easiest way is to use **pip**:
+In order to run the tests, you need to install **llvm-lit** (aka **lit**). It's
+not bundled with LLVM 9 packages, but you can install it with **pip**:
 ```bash
 # Install lit - note that this installs lit globally
 pip install lit
+```
+Not you can run the tests as follows.
 # Run the tests
 $ lit <build_dir>/test
 ```
 Voilà! You should see all tests passing.
 
-Passes
-======
+Overview of The Passes
+======================
    * [**HelloWorld**](#helloworld) - prints the functions in
      the input module and prints the number of arguments for each
    * [**StaticCallCounter**](#count-compile-time-function-calls-staticcallcounter) - counts
