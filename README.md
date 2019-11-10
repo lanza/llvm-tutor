@@ -16,13 +16,14 @@ implementation and the LIT tests verify that each pass works as expected. This
 document explains how to get started.
 
 ### Table of Contents
-[HelloWorld](#helloworld) **::**
-[Development Environment](#development-environment) **::**
-[Build Instructions](#build-instructions) **::**
-[Passes](#passes) **::**
-[Testing](#testing) **::**
-[Credits & References](#credits) **::**
-[License](#license)
+* [HelloWorld](#helloworld)
+* [Development Environment](#development-environment)
+* [Build Instructions](#build-instructions)
+* [Passes](#passes)
+* [Testing](#testing)
+* [Debugging](#debugging)
+* [Credits & References](#credits)
+* [License](#license)
 
 
 HelloWorld
@@ -244,7 +245,7 @@ the above identity, but only for 8-bit integers. The LIT tests verify that both
 the formula and the implementation are correct. You can run **MBAAdd** like this:
 ```bash
 export LLVM_DIR=<installation/dir/of/llvm/9>
-$LLVM_DIR/bin/clang -emit-llvm -S inputs/input_for_mba.c -o input_for_mba.ll
+$LLVM_DIR/bin/clang -O1 -emit-llvm -S inputs/input_for_mba.c -o input_for_mba.ll
 $LLVM_DIR/bin/opt -load <build_dir>/lib/libMBAAdd.so -mba-add inputs/input_for_mba.ll -o out.ll
 ```
 You can also specify the level of _obfuscation_ on a scale of `0.0` to `1.0`, with
@@ -289,17 +290,29 @@ new blocks.
 
 Debugging
 ---------
+When you get unexpected results, you can check the output from
+[LLVM_DEBUG](http://llvm.org/docs/ProgrammersManual.html#the-llvm-debug-macro-and-debug-option)
+and
+[STATISTIC](http://llvm.org/docs/ProgrammersManual.html#the-statistic-class-stats-option)
+macros. For example:
 ```bash
 export LLVM_DIR=<installation/dir/of/llvm/9>
 $LLVM_DIR/bin/clang -emit-llvm -S -O1 inputs/input_for_mba.c -o input_for_mba.ll
 $LLVM_DIR/bin/opt -load-pass-plugin <build_dir>/lib/libMBAAdd.dylib -passes=mba-add input_for_mba.ll -debug-only=mba-add -stats -o out.ll
+  %12 = add i8 %1, %0 ->   <badref> = add i8 111, %11
+  %20 = add i8 %12, %2 ->   <badref> = add i8 111, %19
+  %28 = add i8 %20, %3 ->   <badref> = add i8 111, %27
+===-------------------------------------------------------------------------===
+                          ... Statistics Collected ...
+===-------------------------------------------------------------------------===
 
+3 mba-add - The # of substituted instructions
 ```
-
-
-When things go wrong, you may want to use a debugger. Below I demonstrate how
-to debug [**MBAAdd**](#mbaadd) (more specifically, how to set up a breakpoint
-on entry to `MBAAdd::run`).
+As you can see, you get a nice summary from **MBAAdd**. Note the
+`-debug-only=mba-add` and `-stats` flags in the command line - that's what
+enables the extra output. If that is insufficient, you may want to use a
+debugger. Below I demonstrate how to debug [**MBAAdd**](#mbaadd) (more
+specifically, how to set up a breakpoint on entry to `MBAAdd::run`).
 
 ### Mac OS X
 The default debugger on OS X is [LLDB](http://lldb.llvm.org). You will
