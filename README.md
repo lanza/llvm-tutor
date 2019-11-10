@@ -135,7 +135,7 @@ not bundled with LLVM 9 packages, but you can install it with **pip**:
 # Install lit - note that this installs lit globally
 pip install lit
 ```
-Not you can run the tests as follows.
+Running the tests is as simple as:
 ```bash
 $ lit <build_dir>/test
 ```
