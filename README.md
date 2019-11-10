@@ -18,7 +18,7 @@ document explains how to get started.
 ### Table of Contents
 * [HelloWorld](#helloworld)
 * [Development Environment](#development-environment)
-* [Build & Testing](#building&testing)
+* [Building & Testing](#building-&-testing)
 * [Overview Of The Passes](#overview-of-the-passes)
 * [Debugging](#debugging)
 * [Credits & References](#credits)
@@ -136,7 +136,7 @@ not bundled with LLVM 9 packages, but you can install it with **pip**:
 pip install lit
 ```
 Not you can run the tests as follows.
-# Run the tests
+```bash
 $ lit <build_dir>/test
 ```
 Voilà! You should see all tests passing.
