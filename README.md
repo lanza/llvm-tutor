@@ -18,7 +18,7 @@ document explains how to get started.
 ### Table of Contents
 * [HelloWorld](#helloworld)
 * [Development Environment](#development-environment)
-* [Building & Testing](#building-&-testing)
+* [Building & Testing](#building--testing)
 * [Overview Of The Passes](#overview-of-the-passes)
 * [Debugging](#debugging)
 * [Credits & References](#credits)
