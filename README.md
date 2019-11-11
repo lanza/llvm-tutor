@@ -29,10 +29,12 @@ HelloWorld
 ==========
 The **HelloWorld** pass from
 [HelloWorld.cpp](https://github.com/banach-space/llvm-tutor/blob/master/HelloWorld/HelloWorld.cpp)
-is a basic, self-contained reference example. The corresponding
+is a self-contained reference example. The corresponding
 [CMakeLists.txt](https://github.com/banach-space/llvm-tutor/blob/master/HelloWorld/CMakeLists.txt)
-implements the minimum set-up for an out-of-source pass. You can build
-**HelloWorld** like this:
+implements the minimum set-up for an out-of-source pass. 
+
+For each function in a module, **HelloWord** prints its name and the number of
+arguments that it takes. You can build it like this:
 ```bash
 export LLVM_DIR=<installation/dir/of/llvm/9>
 mkdir build
