@@ -29,7 +29,7 @@ HelloWorld
 ==========
 The **HelloWorld** pass from
 [HelloWorld.cpp](https://github.com/banach-space/llvm-tutor/blob/master/HelloWorld/HelloWorld.cpp)
-is a self-contained reference example. The corresponding
+is a self-contained *reference example*. The corresponding
 [CMakeLists.txt](https://github.com/banach-space/llvm-tutor/blob/master/HelloWorld/CMakeLists.txt)
 implements the minimum set-up for an out-of-source pass. 
 
