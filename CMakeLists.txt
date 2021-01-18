@@ -5,7 +5,7 @@ project(llvm-tutor)
 # 1. VERIFY LLVM INSTALLATION DIR
 #===============================================================================
 # Set this to a valid LLVM installation dir
-set(LT_LLVM_INSTALL_DIR "" CACHE PATH "LLVM installation directory")
+set(LT_LLVM_INSTALL_DIR "/Users/lanza/Projects/llvm-project/build/Debug" CACHE PATH "LLVM installation directory")
 
 # A bit of a sanity checking
 set(LT_LLVM_INCLUDE_DIR "${LT_LLVM_INSTALL_DIR}/include/llvm")
@@ -31,9 +31,9 @@ list(APPEND CMAKE_PREFIX_PATH "${LT_LLVM_INSTALL_DIR}/lib/cmake/llvm/")
 find_package(LLVM REQUIRED CONFIG)
 # FIXME: This is a warkaround for #25. Remove once resolved and use
 # find_package(LLVM 11.0.0 REQUIERED CONFIG) above.
-if(NOT "11" VERSION_EQUAL "${LLVM_VERSION_MAJOR}")
-  message(FATAL_ERROR "Found LLVM ${LLVM_VERSION_MAJOR}, but need LLVM 11")
-endif()
+# if(NOT "11" VERSION_EQUAL "${LLVM_VERSION_MAJOR}")
+#   message(FATAL_ERROR "Found LLVM ${LLVM_VERSION_MAJOR}, but need LLVM 11")
+# endif()
 
 message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
 message(STATUS "Using LLVMConfig.cmake in: ${LT_LLVM_INSTALL_DIR}")
@@ -46,6 +46,7 @@ message("LLVM STATUS:
 )
 
 # Set the LLVM header and library paths
+include_directories(/Users/lanza/.local/include)
 include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
 link_directories(${LLVM_LIBRARY_DIRS})
 add_definitions(${LLVM_DEFINITIONS})

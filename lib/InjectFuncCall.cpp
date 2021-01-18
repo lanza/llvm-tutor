@@ -7,14 +7,15 @@
 //    a call to printf (from the C standard I/O library). The injected IR code
 //    corresponds to the following function call in ANSI C:
 //    ```C
-//      printf("(llvm-tutor) Hello from: %s\n(llvm-tutor)   number of arguments: %d\n",
+//      printf("(llvm-tutor) Hello from: %s\n(llvm-tutor)   number of arguments:
+//      %d\n",
 //             FuncName, FuncNumArgs);
 //    ```
 //    This code is inserted at the beginning of each function, i.e. before any
 //    other instruction is executed.
 //
-//    To illustrate, for `void foo(int a, int b, int c)`, the code added by InjectFuncCall
-//    will generated the following output at runtime:
+//    To illustrate, for `void foo(int a, int b, int c)`, the code added by
+//    InjectFuncCall will generated the following output at runtime:
 //    ```
 //    (llvm-tutor) Hello World from: foo
 //    (llvm-tutor)   number of arguments: 3
@@ -33,8 +34,8 @@
 #include "InjectFuncCall.h"
 
 #include "llvm/IR/IRBuilder.h"
-#include "llvm/Passes/PassPlugin.h"
 #include "llvm/Passes/PassBuilder.h"
+#include "llvm/Passes/PassPlugin.h"
 
 using namespace llvm;
 
@@ -56,10 +57,9 @@ bool InjectFuncCall::runOnModule(Module &M) {
   //    declare i32 @printf(i8*, ...)
   // It corresponds to the following C declaration:
   //    int printf(char *, ...)
-  FunctionType *PrintfTy = FunctionType::get(
-      IntegerType::getInt32Ty(CTX),
-      PrintfArgTy,
-      /*IsVarArgs=*/true);
+  FunctionType *PrintfTy =
+      FunctionType::get(IntegerType::getInt32Ty(CTX), PrintfArgTy,
+                        /*IsVarArgs=*/true);
 
   FunctionCallee Printf = M.getOrInsertFunction("printf", PrintfTy);
 
@@ -69,11 +69,11 @@ bool InjectFuncCall::runOnModule(Module &M) {
   PrintfF->addParamAttr(0, Attribute::NoCapture);
   PrintfF->addParamAttr(0, Attribute::ReadOnly);
 
-
   // STEP 2: Inject a global variable that will hold the printf format string
   // ------------------------------------------------------------------------
   llvm::Constant *PrintfFormatStr = llvm::ConstantDataArray::getString(
-      CTX, "(llvm-tutor) Hello from: %s\n(llvm-tutor)   number of arguments: %d\n");
+      CTX,
+      "(llvm-tutor) Hello from: %s\n(llvm-tutor)   number of arguments: %d\n");
 
   Constant *PrintfFormatStrVar =
       M.getOrInsertGlobal("PrintfFormatStr", PrintfFormatStr->getType());
@@ -112,8 +112,8 @@ bool InjectFuncCall::runOnModule(Module &M) {
 }
 
 PreservedAnalyses InjectFuncCall::run(llvm::Module &M,
-                                       llvm::ModuleAnalysisManager &) {
-  bool Changed =  runOnModule(M);
+                                      llvm::ModuleAnalysisManager &) {
+  bool Changed = runOnModule(M);
 
   return (Changed ? llvm::PreservedAnalyses::none()
                   : llvm::PreservedAnalyses::all());
